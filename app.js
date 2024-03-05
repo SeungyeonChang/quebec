@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 5500;
+const port = process.env.PORT || 5000;
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const bodyParser = require('body-parser')
 // set the view engine to ejs
