@@ -1,0 +1,39 @@
+<%- include('partials/html-start.ejs') %>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Rubik+Bubbles&display=swap');
+  h1 {font-family: "Rubik Bubbles", system-ui;
+  font-weight: 400;
+  font-style: normal;}
+  h3, label, input{
+    font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-style: normal;
+  }
+</style>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <p class="navbar-brand ps-3"></p>
+  <h1 class="navbar-brand">Quebec Lab</h1>
+
+  <ul class="navbar-nav">
+      <li class="navitem"><a class="nav-link" href="https://gist.github.com/barrycumbie/978e0a8f517669733f61d44008e6924c" target="_blank">Quebec Story Card</a> </li>
+      <li class="navitem"><a class="nav-link" href="https://github.com/SeungyeonChang/quebec" target="_blank">My Quebec Repo</a> </li>
+
+  </ul>
+
+</nav>  
+
+  <h1>Quebec</h1>
+
+  <p><%=chainsawData.length%></p>
+  
+  <h3> Let's add new name </h3>
+
+<form method="POST" action="/addSaw">
+    <label for="sawName">Name</label>
+    <input name="sawName" placeholder="new name">
+    <input type="submit" value="add a new name" />
+</form>
+
+
+<%- include('partials/html-end.ejs') %>
