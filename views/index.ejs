@@ -1,39 +1,105 @@
 <%- include('partials/html-start.ejs') %>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Rubik+Bubbles&display=swap');
-  h1 {font-family: "Rubik Bubbles", system-ui;
-  font-weight: 400;
-  font-style: normal;}
-  h3, label, input{
-    font-family: "Pacifico", cursive;
-  font-weight: 400;
-  font-style: normal;
-  }
-</style>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <p class="navbar-brand ps-3"></p>
-  <h1 class="navbar-brand">Quebec Lab</h1>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Rubik+Bubbles&display=swap');
 
-  <ul class="navbar-nav">
-      <li class="navitem"><a class="nav-link" href="https://gist.github.com/barrycumbie/978e0a8f517669733f61d44008e6924c" target="_blank">Quebec Story Card</a> </li>
-      <li class="navitem"><a class="nav-link" href="https://github.com/SeungyeonChang/quebec" target="_blank">My Quebec Repo</a> </li>
+    h1 {
+      font-family: "Rubik Bubbles", system-ui;
+      font-weight: 400;
+      font-style: normal;
+    }
 
-  </ul>
+    h3,
+    label,
+    input {
+      font-family: "Pacifico", cursive;
+      font-weight: 400;
+      font-style: normal;
+    }
 
-</nav>  
+    body {
+      background-color: ivory;
+    }
+  </style>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <p class="navbar-brand ps-3"></p>
+    <h1 class="navbar-brand">Quebec Lab</h1>
 
-  <h1>Quebec</h1>
+    <ul class="navbar-nav">
+      <li class="navitem"><a class="nav-link"
+          href="https://gist.github.com/barrycumbie/978e0a8f517669733f61d44008e6924c" target="_blank">Quebec Story
+          Card</a> </li>
+      <li class="navitem"><a class="nav-link" href="https://github.com/SeungyeonChang/quebec" target="_blank">My Quebec
+          Repo</a> </li>
 
-  <p><%=chainsawData.length%></p>
-  
-  <h3> Let's add new name </h3>
+    </ul>
 
-<form method="POST" action="/addSaw">
-    <label for="sawName">Name</label>
-    <input name="sawName" placeholder="new name">
-    <input type="submit" value="add a new name" />
-</form>
+  </nav>
+
+  <body>
+    <center>
+      <h1>Quebec</h1>
+      <p>
+        <%= infoData.length %>
+      </p>
+
+      <div class="row justify-content-center">
+        <div class="card col-md-6 ml-auto">
+          <h3> Introduce Yourslef! </h3>
+
+          <form method="POST" action="/addInfo">
+            <label for="name">Name: </label>
+            <input name="name" placeholder="What's ur Name?">
+            <br>
+            <label for='country'>Nationality: </label>
+            <input name='country' placeholder="Where r u from?">
+            <br>
+            <label for='job'>Occupation: </label>
+            <input name='job' placeholder="What's ur job?">
+            <br>
+            <label for='hobby'>Hobby: </label>
+            <input name='hobby' placeholder="What's ur hobby?">
+            <br>
+            <label for='note'>About you: </label>
+            <input name="note" placeholder="Write about you:)">
+            <br><br>
+
+            <button class="btn btn-primary" type='submit'>Add your Info</button>
+          </form>
+        </div>
+      </div>
 
 
-<%- include('partials/html-end.ejs') %>
+
+      <% for (var i=0; i < infoData.length; i++) { %>
+        <hr>
+        <div class="row justify-content-center">
+          <div class="style=display: flex;" >
+          <form id="updateform <% i%>" method='post' action='/updateInfo'>
+            <h1>Thanks for your Info!</h1>
+            <input type="hidden" id="id" name="id" value="<%= infoData[i]._id %>"></input>
+            <label for="name">Name: </label>
+            <input type="text" name="name" value="<%= infoData[i].name %>">
+            <label for='country'>Nationality: </label>
+            <input type="text" name="country" value="<%= infoData[i].country %>">
+            <label for='job'>Occupation: </label>
+            <input type="text" name="job" value="<%= infoData[i].job %>">
+            <label for='hobby'>Hobby: </label>
+            <input type="text" name="hobby" value="<%= infoData[i].hobby %>">
+            <label for='note'>About you: </label>
+            <input type="text" name="note" value="<%= infoData[i].note %>">
+            <br>
+
+            <button type='submit' style="margin-left : 16px; background-color:rgb(95, 95, 251)">Update</button>
+            </form>
+            <form method="POST" action="/deleteInfo">
+              <input type="hidden" name="id" value="<%= infoData[i]._id %>">
+              <button type="submit" style="margin-left : 16px; background-color: red">Delete</button>
+            </form>
+          </div>
+        </div>
+        <% } %>
+    </center>
+  </body>
+
+  <%- include('partials/html-end.ejs') %>
