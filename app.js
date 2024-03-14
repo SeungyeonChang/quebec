@@ -90,7 +90,6 @@ app.post('/addInfo', async (req, res) => {
 
 });
 
-
 app.post('/updateInfo', async (req, res) => {
 
   try {
@@ -119,13 +118,16 @@ app.post('/updateInfo', async (req, res) => {
         console.log(result);
         res.redirect('/');
       })
-      .catch(error => console.error(error));
-    res.status(500).send("Internal Server Error");
-  }
-  finally {
-  }
+    }
+    catch(error){
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    }
+  finally {}
 
-});
+}); 
+
+  
 
 app.post('/deleteInfo', async (req, res) => {
 
