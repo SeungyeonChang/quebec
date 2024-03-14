@@ -101,11 +101,9 @@ app.post('/updateInfo', async (req, res) => {
       .db("quebec-database")
       .collection("quebec-collection");
 
-    let result = await collection.findOneAndUpdate({
-      "_id": new ObjectId(req.body.id)
-    },
-      {
-        $set:
+    let result = await collection.findOneAndUpdate(
+      {"_id": new ObjectId(req.body.id)},
+      {$set:
         {
           name: req.body.name,
           country: req.body.country,
