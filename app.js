@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5500;
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const ObjectId = require('mongodb').ObjectId;
 const bodyParser = require('body-parser')
@@ -101,9 +101,11 @@ app.post('/updateInfo', async (req, res) => {
       .db("quebec-database")
       .collection("quebec-collection");
 
-    let result = await collection.findOneAndUpdate(
-      {"_id": new ObjectId(req.body.id)},
-      {$set:
+    let result = await collection.findOneAndUpdate({
+      "_id": new ObjectId(req.body.id)
+    },
+      {
+        $set:
         {
           name: req.body.name,
           country: req.body.country,
@@ -117,13 +119,15 @@ app.post('/updateInfo', async (req, res) => {
         console.log(result);
         res.redirect('/');
       })
-      .catch(error => console.error(error));
-    res.status(500).send("Internal Server Error");
-  }
-  finally {
-  }
+    }
+    catch(error){
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    }
+  finally {}
 
-});
+}); 
+
 
 app.post('/deleteInfo', async (req, res) => {
 
